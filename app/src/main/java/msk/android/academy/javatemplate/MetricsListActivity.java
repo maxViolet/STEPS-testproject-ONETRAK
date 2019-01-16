@@ -7,10 +7,14 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import msk.android.academy.javatemplate.network.Api;
 import msk.android.academy.javatemplate.network.StepsItemDTO;
 import msk.android.academy.javatemplate.utils.DensityPixelMath;
+import msk.android.academy.javatemplate.utils.Mapper;
 import msk.android.academy.javatemplate.utils.Margins;
 
 public class MetricsListActivity extends AppCompatActivity {
@@ -41,17 +45,17 @@ public class MetricsListActivity extends AppCompatActivity {
         rv.addItemDecoration(decoration);
     }
 
-   /* private void loadMetricsToDb() {
+    private void loadMetricsToDb() {
         Log.d("room", "load metrics START");
         final Disposable searchDisposable = Api.getInstance()
                 .stepsEndpoint()
                 .getMetrics()
-                .map(response -> Mapper.DtoToDb(response.getStepsDTO()))
-                .flatMapCompletable(StepsItemDB -> stepsRepository.saveData(StepsItemDB))
+//                .map(response -> Mapper.DtoToDb(response.getStepsDTO()))
+//                .flatMapCompletable(StepsItemDB -> stepsRepository.saveData(StepsItemDB))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
         Log.d("room", "load metrics END");
         compositeDisposable.add(searchDisposable);
-    }*/
+    }
 }
