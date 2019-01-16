@@ -65,5 +65,4 @@ public class StepsItemDB {
     public void setRun(int run) {
         this.run = run;
     }
-
 }

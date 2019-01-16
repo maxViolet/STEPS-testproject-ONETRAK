@@ -29,7 +29,6 @@ public final class Api {
         final OkHttpClient httpClient = buildOkHttpClient();
         final Retrofit retrofit = buildRetrofitClient(httpClient);
 
-        //init endpoints here. It's can be more then one stepsEndpoint
         stepsEndpoint = retrofit.create(Endpoint.class);
     }
 
