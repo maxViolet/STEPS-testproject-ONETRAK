@@ -18,8 +18,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
     private final LayoutInflater inflater;
 //    @NonNull
 //    private final newsItemClickListener clickListener;
-//    @NonNull
-//    private final RequestManager imageLoader;
 
     public MetricsListAdapter(@NonNull Context context,
                               @NonNull List<StepsItemDTO> metrics) {
@@ -66,17 +64,12 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 //    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //        private int id;
         private TextView dateView;
         private TextView summView;
         private TextView goalView;
         private TextView int_walkView;
         private TextView int_aerobicView;
         private TextView int_runView;
-
-//        public int returnID() {
-//            return id;
-//        }
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

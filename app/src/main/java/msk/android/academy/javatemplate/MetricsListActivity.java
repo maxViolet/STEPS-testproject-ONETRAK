@@ -29,10 +29,19 @@ public class MetricsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("lifecycle", "onCreate");
         setContentView(R.layout.activity_main);
         stepsRepository = new Repository(this);
 
         setupRecycler();
+        loadMetricsToDb();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("lifecycle", "onStop");
+        compositeDisposable.clear();
     }
 
     public void setupRecycler() {
