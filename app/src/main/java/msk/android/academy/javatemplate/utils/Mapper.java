@@ -26,7 +26,7 @@ public class Mapper {
             Log.d("room", "items converted: " + item_dto.getDate() + " | "
                     + "[ " + item_dto.getWalk() + ", " + item_dto.getAerobic() + ", " + item_dto.getRun() + " ]");
         }
-        return list;*/
-    }
+        return list;
+    }*/
 
 }
