@@ -14,13 +14,15 @@ import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.network.Api;
 import msk.android.academy.javatemplate.network.StepsItemDTO;
 import msk.android.academy.javatemplate.room.Repository;
+import msk.android.academy.javatemplate.room.StepsItemDB;
 import msk.android.academy.javatemplate.utils.DensityPixelMath;
 import msk.android.academy.javatemplate.utils.Mapper;
 import msk.android.academy.javatemplate.utils.Margins;
+import msk.android.academy.javatemplate.utils.StepsItem;
 
 public class MetricsListActivity extends AppCompatActivity {
 
-    private static int MARGIN = 30;
+    private static int MARGIN = 50;
     private RecyclerView rv;
     private MetricsListAdapter adapter;
     private Repository stepsRepository;
@@ -35,6 +37,7 @@ public class MetricsListActivity extends AppCompatActivity {
 
         setupRecycler();
         loadMetricsToDb();
+        showItems();
     }
 
     @Override
@@ -46,7 +49,7 @@ public class MetricsListActivity extends AppCompatActivity {
 
     public void setupRecycler() {
         rv = (RecyclerView) findViewById(R.id.recycler);
-        adapter = new MetricsListAdapter(this, new ArrayList<StepsItemDTO>());
+        adapter = new MetricsListAdapter(this, new ArrayList<StepsItem>());
 
         DensityPixelMath DPmath = new DensityPixelMath(this);
         Margins decoration = new Margins((int) DPmath.dpFromPx(MARGIN), 1);
@@ -60,12 +63,18 @@ public class MetricsListActivity extends AppCompatActivity {
         final Disposable searchDisposable = Api.getInstance()
                 .stepsEndpoint()
                 .getMetrics()
-                .map(response -> Mapper.DtoToDb(response.getStepsDTO()))
+                .map(list -> Mapper.DtoToDb(list))
                 .flatMapCompletable(StepsItemDB -> stepsRepository.saveData(StepsItemDB))
+//                .map(response -> Mapper.DtoToDb(response.getStepsDTO()))
+//                .flatMapCompletable(StepsItemDB -> stepsRepository.saveData(StepsItemDB))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
         Log.d("room", "load metrics END");
         compositeDisposable.add(searchDisposable);
+    }
+
+    private void showItems() {
+
     }
 }

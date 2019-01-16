@@ -23,10 +23,30 @@ public class Mapper {
                             item_dto.getRun()
                     )
             );
-            Log.d("room", "items converted: " + item_dto.getDate() + " | "
+            Log.d("room", "items added to DB: " + item_dto.getDate() + " | "
                     + "[ " + item_dto.getWalk() + ", " + item_dto.getAerobic() + ", " + item_dto.getRun() + " ]");
         }
         return list;
+    }
+
+    public static List<StepsItem> DbToItem(List<StepsItemDB> listDb) {
+
+        final List<StepsItem> list = new ArrayList<>();
+
+        for (StepsItemDB item_db : listDb) {
+            list.add(
+                    new StepsItem(
+                            item_db.getId(),
+                            DateUtils.formatDateFromDb(item_db.getDate()),
+                            item_db.getGoal(),
+                            item_db.getWalk(),
+                            item_db.getAerobic(),
+                            item_db.getRun()
+                    )
+            );
+        }
+        return list;
+
     }
 
 }

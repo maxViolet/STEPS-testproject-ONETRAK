@@ -10,17 +10,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import msk.android.academy.javatemplate.network.StepsItemDTO;
+import msk.android.academy.javatemplate.utils.StepsItem;
 
 public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.ViewHolder> {
     @NonNull
-    private List<StepsItemDTO> metrics;
+    private List<StepsItem> metrics;
     private final LayoutInflater inflater;
 //    @NonNull
 //    private final newsItemClickListener clickListener;
 
     public MetricsListAdapter(@NonNull Context context,
-                              @NonNull List<StepsItemDTO> metrics) {
+                              @NonNull List<StepsItem> metrics) {
         this.metrics = metrics;
         this.inflater = LayoutInflater.from(context);
 //        this.clickListener = clickListener;
@@ -34,9 +34,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         );
     }
 
-    @Override //указывает содержимое каждого элемента RecyclerView
+    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // get our custom object from our dataset at this position
         holder.bind(metrics.get(position));
     }
 
@@ -49,14 +48,14 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 //        return metrics.get(0).getId();
 //    }
 
-//    public void replaceItems(@NonNull List<StepsItemDTO> stepsItemDTOs) {
-//        metrics.clear();
-//        metrics.addAll(stepsItemDTOs);
-//        notifyDataSetChanged();
-//    }
+    public void replaceItems(@NonNull List<StepsItem> stepsItems) {
+        metrics.clear();
+        metrics.addAll(stepsItems);
+        notifyDataSetChanged();
+    }
 
-    public void add(List<StepsItemDTO> stepsItemDTOs) {
-        this.metrics.addAll(stepsItemDTOs);
+    public void add(List<StepsItem> stepsItems) {
+        this.metrics.addAll(stepsItems);
     }
 
 //    public interface newsItemClickListener {
@@ -87,19 +86,18 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             int_runView = (TextView) itemView.findViewById(R.id.run);
         }
 
-        void bind(StepsItemDTO stepsItemDTO) {
-            dateView.setText(stepsItemDTO.getDate());
-            summView.setText(getSumm(stepsItemDTO));
-//            goalView.setText(stepsItemDTO.getGoal);
-
-            int_walkView.setText(stepsItemDTO.getWalk());
-            int_walkView.setText(stepsItemDTO.getWalk());
-            int_walkView.setText(stepsItemDTO.getWalk());
+        void bind(StepsItem stepsItem) {
+            dateView.setText(stepsItem.getDate());
+            summView.setText(getSumm(stepsItem));
+//            goalView.setText(stepsItem.getGoal);
+            int_walkView.setText(stepsItem.getWalk());
+            int_walkView.setText(stepsItem.getWalk());
+            int_walkView.setText(stepsItem.getWalk());
         }
 
-        private int getSumm(StepsItemDTO stepsItemDTO) {
-            int summ = Integer.parseInt(String.valueOf(stepsItemDTO.getWalk())) +
-                    Integer.parseInt(String.valueOf(stepsItemDTO.getAerobic())) + Integer.parseInt(String.valueOf(stepsItemDTO.getRun()));
+        private int getSumm(StepsItem stepsItem) {
+            int summ = Integer.parseInt(String.valueOf(stepsItem.getWalk())) +
+                    Integer.parseInt(String.valueOf(stepsItem.getAerobic())) + Integer.parseInt(String.valueOf(stepsItem.getRun()));
             return summ;
         }
     }

@@ -15,8 +15,8 @@ public interface StepsItemDAO {
     @Query("SELECT * FROM stepsItemDB")
     List<StepsItemDB> getAll();
 
-    @Query("SELECT * FROM stepsItemDB")
-    Observable<List<StepsItemDB>> getAllObservable();
+//    @Query("SELECT * FROM stepsItemDB")
+//    Observable<List<StepsItemDB>> getAllObservable();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(StepsItemDB... stepsItemDBs);

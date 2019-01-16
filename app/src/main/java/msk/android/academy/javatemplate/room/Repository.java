@@ -36,9 +36,9 @@ public class Repository {
         });
     }
 
-    public Observable<List<StepsItemDB>> getDataObservable() {
-        AppDatabase db = AppDatabase.getAppDatabase(mContext);
-        return db.stepsItemDAO().getAllObservable();
-    }
+//    public Observable<List<StepsItemDB>> getDataObservable() {
+//        AppDatabase db = AppDatabase.getAppDatabase(mContext);
+//        return db.stepsItemDAO().getAllObservable();
+//    }
 
 }

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class StepsItemDTO {
 
     @SerializedName("date")
-    private int date;
+    private long date;
 
     @SerializedName("walk")
     private int walk;
@@ -16,7 +16,7 @@ public class StepsItemDTO {
     @SerializedName("run")
     private int run;
 
-    public int getDate() {
+    public long getDate() {
         return date;
     }
 

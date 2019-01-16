@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "stepsItemDB")
 public class StepsItemDB {
 
-    public StepsItemDB(int date, int walk, int aerobic, int run) {
+    public StepsItemDB(long date, int walk, int aerobic, int run) {
         this.date = date;
         this.walk = walk;
         this.aerobic = aerobic;
@@ -18,7 +18,7 @@ public class StepsItemDB {
     @ColumnInfo(name = "id")
     private int id;
     @ColumnInfo(name = "date")
-    private int date;
+    private long date;
     @ColumnInfo(name = "goal")
     private int goal;
     @ColumnInfo(name = "walk")
@@ -31,7 +31,7 @@ public class StepsItemDB {
     public int getId() {
         return id;
     }
-    public int getDate() {
+    public long getDate() {
         return date;
     }
     public int getGoal() {
@@ -50,7 +50,7 @@ public class StepsItemDB {
     public void setId(int id) {
         this.id = id;
     }
-    public void setDate(int date) {
+    public void setDate(long date) {
         this.date = date;
     }
     public void setGoal(int goal) {
