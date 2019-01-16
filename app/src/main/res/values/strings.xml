@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JavaTemplate</string>
+    <string name="walk">walk</string>
+    <string name="aerobic">aerobic</string>
+    <string name="run">run</string>
+    <string name="Goal_reached">goal_reached</string>
 </resources>
