@@ -10,7 +10,7 @@ import msk.android.academy.javatemplate.room.StepsItemDB;
 
 public class Mapper {
 
-   /* public static List<StepsItemDB> DtoToDb(List<StepsItemDTO> listDto) {
+    public static List<StepsItemDB> DtoToDb(List<StepsItemDTO> listDto) {
 
         final List<StepsItemDB> list = new ArrayList<>();
 
@@ -27,6 +27,6 @@ public class Mapper {
                     + "[ " + item_dto.getWalk() + ", " + item_dto.getAerobic() + ", " + item_dto.getRun() + " ]");
         }
         return list;
-    }*/
+    }
 
 }
