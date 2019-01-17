@@ -88,11 +88,11 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
         void bind(StepsItem stepsItem) {
             dateView.setText(stepsItem.getDate());
-            summView.setText(getSumm(stepsItem));
+//            summView.setText(getSumm(stepsItem));
 //            goalView.setText(stepsItem.getGoal);
-            int_walkView.setText(stepsItem.getWalk());
-            int_walkView.setText(stepsItem.getWalk());
-            int_walkView.setText(stepsItem.getWalk());
+//            int_walkView.setText(stepsItem.getWalk());
+//            int_walkView.setText(stepsItem.getWalk());
+//            int_walkView.setText(stepsItem.getWalk());
         }
 
         private int getSumm(StepsItem stepsItem) {

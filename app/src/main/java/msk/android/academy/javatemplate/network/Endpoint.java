@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 public interface Endpoint {
     @NonNull
     @GET("/intern/metric.json")
-//    Single<Response> getMetrics();
+//    Single<Response> getSingleMetrics();
     Single<List<StepsItemDTO>> getMetrics();
 
 }

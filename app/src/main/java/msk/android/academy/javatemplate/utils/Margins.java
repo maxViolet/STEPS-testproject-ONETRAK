@@ -21,16 +21,16 @@ public class Margins extends RecyclerView.ItemDecoration {
         int position = parent.getChildLayoutPosition(view);
 
         //set right margin to all
-        outRect.right = margin;
+//        outRect.right = margin;
         //set bottom margin to all
         outRect.bottom = margin;
         //we only add top margin to the first row
         if (position < columns) {
-            outRect.top = margin;
+            outRect.top = margin*2;
         }
         //add left margin only to the first column
-        if (position % columns == 0) {
-            outRect.left = margin;
-        }
+//        if (position % columns == 0) {
+//            outRect.left = margin;
+//        }
     }
 }

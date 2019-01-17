@@ -6,15 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.javatemplate.network.Api;
-import msk.android.academy.javatemplate.network.StepsItemDTO;
 import msk.android.academy.javatemplate.room.Repository;
-import msk.android.academy.javatemplate.room.StepsItemDB;
 import msk.android.academy.javatemplate.utils.DensityPixelMath;
 import msk.android.academy.javatemplate.utils.Mapper;
 import msk.android.academy.javatemplate.utils.Margins;
@@ -22,7 +21,7 @@ import msk.android.academy.javatemplate.utils.StepsItem;
 
 public class MetricsListActivity extends AppCompatActivity {
 
-    private static int MARGIN = 50;
+    private static int MARGIN = 150;
     private RecyclerView rv;
     private MetricsListAdapter adapter;
     private Repository stepsRepository;
@@ -56,25 +55,36 @@ public class MetricsListActivity extends AppCompatActivity {
 
         rv.setAdapter(adapter);
         rv.addItemDecoration(decoration);
+
     }
 
     private void loadMetricsToDb() {
         Log.d("room", "load metrics START");
-        final Disposable searchDisposable = Api.getInstance()
+        final Disposable loadDisposable = Api.getInstance()
                 .stepsEndpoint()
                 .getMetrics()
                 .map(list -> Mapper.DtoToDb(list))
                 .flatMapCompletable(StepsItemDB -> stepsRepository.saveData(StepsItemDB))
-//                .map(response -> Mapper.DtoToDb(response.getStepsDTO()))
-//                .flatMapCompletable(StepsItemDB -> stepsRepository.saveData(StepsItemDB))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
         Log.d("room", "load metrics END");
-        compositeDisposable.add(searchDisposable);
+        compositeDisposable.add(loadDisposable);
     }
 
     private void showItems() {
+        Log.d("rv", "showItems");
+        Disposable showDisposable = stepsRepository.getFlowableMetrics()
+                .map(items -> Mapper.DbToItem(items))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(items -> replaceItems(items),
+                        throwable -> Log.d("rv", throwable.toString()));
 
+        compositeDisposable.add(showDisposable);
+    }
+
+    private void replaceItems(List<StepsItem> stepsItems) {
+        if (adapter != null) adapter.replaceItems(stepsItems);
     }
 }

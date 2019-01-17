@@ -7,16 +7,20 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 @Dao
 public interface StepsItemDAO {
 
     @Query("SELECT * FROM stepsItemDB")
-    List<StepsItemDB> getAll();
+    List<StepsItemDB> getAllMetrics();
 
 //    @Query("SELECT * FROM stepsItemDB")
-//    Observable<List<StepsItemDB>> getAllObservable();
+//    Observable<List<StepsItemDB>> getMetricsObservable();
+
+    @Query("SELECT * FROM stepsItemDB")
+    Flowable<List<StepsItemDB>> getMetricsFlowable();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(StepsItemDB... stepsItemDBs);

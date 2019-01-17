@@ -9,15 +9,7 @@ import java.util.Date;
 public class DateUtils {
 
     public static String formatDateFromDb(long sDate) {
-
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-//        Date date = null;
-//        try {
-//            date = formatter.parse(sDate.toString());
-//        } catch (ParseException e) {
-//            Log.d("dateUtils","e.printStackTrace()");
-//        }
-
+//        Log.d("DateUtils", "date before:" + sDate);
         String input = String.valueOf(sDate);
         Date d = null;
         try {
@@ -25,8 +17,9 @@ public class DateUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d);
+        String output = new SimpleDateFormat("dd.MM.yyyy").format(d);
 
+//        Log.d("DateUtils", "date after:" + output);
         return output;
     }
 }
