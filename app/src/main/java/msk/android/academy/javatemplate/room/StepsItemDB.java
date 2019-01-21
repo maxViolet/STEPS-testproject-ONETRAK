@@ -7,6 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "stepsItemDB")
 public class StepsItemDB {
 
+    private static int DEFAULT_GOAL = 4000;
+
     public StepsItemDB(long date, int walk, int aerobic, int run) {
         this.date = date;
         this.walk = walk;
@@ -35,8 +37,10 @@ public class StepsItemDB {
         return date;
     }
     public int getGoal() {
-        return goal;
+        if ( goal == 0) return DEFAULT_GOAL;
+        else return goal;
     }
+
     public int getWalk() {
         return walk;
     }

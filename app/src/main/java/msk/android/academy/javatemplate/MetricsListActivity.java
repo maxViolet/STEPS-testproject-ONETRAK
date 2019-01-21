@@ -59,7 +59,7 @@ public class MetricsListActivity extends AppCompatActivity {
     }
 
     private void loadMetricsToDb() {
-        Log.d("room", "load metrics START");
+        Log.d("database", "load metrics START");
         final Disposable loadDisposable = Api.getInstance()
                 .stepsEndpoint()
                 .getMetrics()
@@ -68,7 +68,7 @@ public class MetricsListActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe();
-        Log.d("room", "load metrics END");
+        Log.d("database", "load metrics END");
         compositeDisposable.add(loadDisposable);
     }
 
@@ -80,7 +80,6 @@ public class MetricsListActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(items -> replaceItems(items),
                         throwable -> Log.d("rv", throwable.toString()));
-
         compositeDisposable.add(showDisposable);
     }
 

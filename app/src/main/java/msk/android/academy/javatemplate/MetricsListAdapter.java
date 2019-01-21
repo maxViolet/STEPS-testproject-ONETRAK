@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -69,6 +70,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         private TextView int_walkView;
         private TextView int_aerobicView;
         private TextView int_runView;
+        private ProgressBar progressBar;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,15 +86,32 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             int_walkView = (TextView) itemView.findViewById(R.id.walk);
             int_aerobicView = (TextView) itemView.findViewById(R.id.aerobic);
             int_runView = (TextView) itemView.findViewById(R.id.run);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar);
         }
 
         void bind(StepsItem stepsItem) {
+            summView.setText(String.valueOf(getSumm(stepsItem)));
+
             dateView.setText(stepsItem.getDate());
-//            summView.setText(getSumm(stepsItem));
-//            goalView.setText(stepsItem.getGoal);
-//            int_walkView.setText(stepsItem.getWalk());
-//            int_walkView.setText(stepsItem.getWalk());
-//            int_walkView.setText(stepsItem.getWalk());
+            String goalText = getSumm(stepsItem) + " / " + String.valueOf(stepsItem.getGoal());
+
+            goalView.setText(goalText);
+            int_walkView.setText(String.valueOf(stepsItem.getWalk()));
+            int_aerobicView.setText(String.valueOf(stepsItem.getAerobic()));
+            int_runView.setText(String.valueOf(stepsItem.getRun()));
+
+            double i = ((stepsItem.getWalk() / (double) getSumm(stepsItem)) * 100);
+            double j = ((stepsItem.getAerobic() / (double) getSumm(stepsItem)) * 100);
+
+            if (i != 0 && i > 1) {
+                progressBar.setProgress((int) i);
+            }
+            if (i != 0 && i < 1) progressBar.setProgress(1);
+
+            if (j != 0 && j > 1) {
+                progressBar.setSecondaryProgress((int) (i + j));
+            }
+            if (j != 0 && j < 1) progressBar.setSecondaryProgress((int) (i + 1));
         }
 
         private int getSumm(StepsItem stepsItem) {
