@@ -81,7 +81,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 //                }
 //            });
             dateView = (TextView) itemView.findViewById(R.id.date);
-            summView = (TextView) itemView.findViewById(R.id.summ);
             goalView = (TextView) itemView.findViewById(R.id.goal);
             int_walkView = (TextView) itemView.findViewById(R.id.walk);
             int_aerobicView = (TextView) itemView.findViewById(R.id.aerobic);
@@ -90,8 +89,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         }
 
         void bind(StepsItem stepsItem) {
-            summView.setText(String.valueOf(getSumm(stepsItem)));
-
             dateView.setText(stepsItem.getDate());
             String goalText = getSumm(stepsItem) + " / " + String.valueOf(stepsItem.getGoal());
 

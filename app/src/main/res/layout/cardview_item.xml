@@ -5,7 +5,7 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="0dp"
+    app:cardElevation="@dimen/zero"
     app:cardUseCompatPadding="false">
 
     <LinearLayout
@@ -15,35 +15,33 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/one_dp"
             android:background="@color/light_light_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="12dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/small_padding12">
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="12dp"
-                android:paddingEnd="48dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18"
+                android:textStyle="normal"
                 tools:text="@tools:sample/date/ddmmyy" />
-
-            <TextView
-                android:id="@+id/summ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@tools:sample/cities" />
 
             <TextView
                 android:id="@+id/goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="48dp"
+                android:paddingEnd="@dimen/big_padding48"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size16"
                 tools:text="@tools:sample/cities" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -57,83 +55,113 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="false"
+                android:padding="@dimen/small_padding12"
                 android:progressTint="#81DAF5"
-                android:secondaryProgressTint="#0B4C5F"
-                android:padding="10dp" />
+                android:secondaryProgressTint="#0B4C5F" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/walk"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="48dp"
-                tools:text="@tools:sample/us_zipcodes" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/aerobic"
+                <TextView
+                    android:id="@+id/walk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size14"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/walk"
+                    android:textColor="@color/light_gray"
+                    tools:text="walk" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="48dp"
-                android:paddingEnd="48dp"
-                tools:text="@tools:sample/us_zipcodes" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/run"
+                <TextView
+                    android:id="@+id/aerobic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/big_padding48"
+                    android:paddingEnd="@dimen/big_padding48"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size14"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/big_padding48"
+                    android:paddingEnd="@dimen/big_padding48"
+                    android:text="@string/aerobic"
+                    android:textColor="@color/light_gray"
+                    tools:text="aerobic" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="48dp"
-                tools:text="@tools:sample/us_zipcodes" />
-        </LinearLayout>
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingBottom="14dp">
+                <TextView
+                    android:id="@+id/run"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size14"
+                    tools:text="@tools:sample/us_zipcodes" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="48dp"
-                android:text="@string/walk"
-                android:textColor="@color/light_gray"
-                tools:text="walk" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="48dp"
-                android:paddingEnd="48dp"
-                android:text="@string/aerobic"
-                android:textColor="@color/light_gray"
-                tools:text="aerobic" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="48dp"
-                android:text="@string/run"
-                android:textColor="@color/light_gray"
-                tools:text="run" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/run"
+                    android:textColor="@color/light_gray"
+                    tools:text="run" />
+            </LinearLayout>
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/medium_padding32"
+            android:layout_marginEnd="@dimen/medium_padding32"
             android:orientation="horizontal">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_light_gray"
+                android:paddingStart="@dimen/big_padding48"
+                android:paddingEnd="@dimen/big_padding48" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="48dp"
-                android:paddingBottom="12dp"
-                android:text="@string/Goal_reached" />
+                android:paddingBottom="@dimen/small_padding12"
+                android:text="@string/Goal_reached"
+                android:textColor="#0B4C5F"
+                android:textSize="@dimen/text_size16" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
