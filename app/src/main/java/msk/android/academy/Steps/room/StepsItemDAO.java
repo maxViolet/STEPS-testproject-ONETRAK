@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate.room;
+package msk.android.academy.Steps.room;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
@@ -8,7 +8,6 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 
 @Dao
 public interface StepsItemDAO {

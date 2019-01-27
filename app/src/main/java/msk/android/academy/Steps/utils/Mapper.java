@@ -1,12 +1,12 @@
-package msk.android.academy.javatemplate.utils;
+package msk.android.academy.Steps.utils;
 
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import msk.android.academy.javatemplate.network.StepsItemDTO;
-import msk.android.academy.javatemplate.room.StepsItemDB;
+import msk.android.academy.Steps.network.StepsItemDTO;
+import msk.android.academy.Steps.room.StepsItemDB;
 
 public class Mapper {
 

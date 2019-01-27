@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate.network;
+package msk.android.academy.Steps.network;
 
 import android.support.annotation.NonNull;
 

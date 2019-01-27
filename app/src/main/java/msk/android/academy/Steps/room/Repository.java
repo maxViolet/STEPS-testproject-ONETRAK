@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate.room;
+package msk.android.academy.Steps.room;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,8 +8,6 @@ import java.util.concurrent.Callable;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.Single;
 
 public class Repository {
     public final Context mContext;
@@ -18,19 +16,19 @@ public class Repository {
         this.mContext = mContext;
     }
 
-    public Single<List<StepsItemDB>> getSingleMetrics() {
-        return Single.fromCallable(() -> {
-            AppDatabase db = AppDatabase.getAppDatabase(mContext);
+//    public Single<List<StepsItemDB>> getSingleMetrics() {
+//        return Single.fromCallable(() -> {
+//            AppDatabase db = AppDatabase.getAppDatabase(mContext);
+//
+//            return db.stepsItemDAO().getAllMetrics();
+//        });
+//    }
 
-            return db.stepsItemDAO().getAllMetrics();
-        });
-    }
-
-    public List<StepsItemDB> getListMetrics() {
-        AppDatabase db = AppDatabase.getAppDatabase(mContext);
-
-        return db.stepsItemDAO().getAllMetrics();
-    }
+//    public List<StepsItemDB> getListMetrics() {
+//        AppDatabase db = AppDatabase.getAppDatabase(mContext);
+//
+//        return db.stepsItemDAO().getAllMetrics();
+//    }
 
     public Completable saveData(final List<StepsItemDB> stepsItemDBs) {
         Log.d("room", "Repository.class - DATA SAVED to DB");

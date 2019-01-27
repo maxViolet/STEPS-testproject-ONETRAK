@@ -1,8 +1,5 @@
-package msk.android.academy.javatemplate.utils;
+package msk.android.academy.Steps.utils;
 
-import android.util.Log;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

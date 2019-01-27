@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JavaTemplate</string>
+    <string name="app_name">Steps</string>
     <string name="walk">walk</string>
     <string name="aerobic">aerobic</string>
     <string name="run">run</string>

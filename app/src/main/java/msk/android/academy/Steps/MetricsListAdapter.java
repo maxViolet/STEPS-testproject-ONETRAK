@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate;
+package msk.android.academy.Steps;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,11 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-import msk.android.academy.javatemplate.utils.StepsItem;
+import msk.android.academy.Steps.utils.StepsItem;
 
 public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.ViewHolder> {
     @NonNull
@@ -45,10 +46,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         return metrics.size();
     }
 
-//    public int getFirstItemId() {
-//        return metrics.get(0).getId();
-//    }
-
     public void replaceItems(@NonNull List<StepsItem> stepsItems) {
         metrics.clear();
         metrics.addAll(stepsItems);
@@ -71,6 +68,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         private TextView int_aerobicView;
         private TextView int_runView;
         private ProgressBar progressBar;
+        private RelativeLayout goalReachedBlock;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,11 +84,12 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             int_aerobicView = (TextView) itemView.findViewById(R.id.aerobic);
             int_runView = (TextView) itemView.findViewById(R.id.run);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar);
+            goalReachedBlock = (RelativeLayout) itemView.findViewById(R.id.goal_reached_block);
         }
 
         void bind(StepsItem stepsItem) {
             dateView.setText(stepsItem.getDate());
-            String goalText = getSumm(stepsItem) + " / " + String.valueOf(stepsItem.getGoal());
+            String goalText = getSumm(stepsItem) + " / " + String.valueOf(stepsItem.getGoal() + " steps");
 
             goalView.setText(goalText);
             int_walkView.setText(String.valueOf(stepsItem.getWalk()));
@@ -99,22 +98,35 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
             double i = ((stepsItem.getWalk() / (double) getSumm(stepsItem)) * 100);
             double j = ((stepsItem.getAerobic() / (double) getSumm(stepsItem)) * 100);
+            double k = ((stepsItem.getRun() / (double) getSumm(stepsItem)) * 100);
 
-            if (i != 0 && i > 1) {
-                progressBar.setProgress((int) i);
-            }
-            if (i != 0 && i < 1) progressBar.setProgress(1);
+            setProgressBar(i, j, k);
 
-            if (j != 0 && j > 1) {
-                progressBar.setSecondaryProgress((int) (i + j));
+            //показывать достижение цели на день при выполнении
+            if (getSumm(stepsItem) >= stepsItem.getGoal()) {
+                goalReachedBlock.setVisibility(View.VISIBLE);
             }
-            if (j != 0 && j < 1) progressBar.setSecondaryProgress((int) (i + 1));
         }
 
         private int getSumm(StepsItem stepsItem) {
             int summ = Integer.parseInt(String.valueOf(stepsItem.getWalk())) +
                     Integer.parseInt(String.valueOf(stepsItem.getAerobic())) + Integer.parseInt(String.valueOf(stepsItem.getRun()));
             return summ;
+        }
+
+        private void setProgressBar(double i, double j, double k) {
+            progressBar.setScaleY(2f);
+            if (i != 0 && i > 1) progressBar.setProgress((int) i);
+
+            //минимальное отображение величины
+            if (i != 0 && i < 1) progressBar.setProgress(1);
+
+            if (j != 0 && j > 1) progressBar.setSecondaryProgress((int) (i + j));
+
+            //минимальное отображение величины
+            if (j != 0 && j < 1) progressBar.setSecondaryProgress((int) (i + 1));
+
+//            if (k != 0) progressBar.tint;
         }
     }
 }

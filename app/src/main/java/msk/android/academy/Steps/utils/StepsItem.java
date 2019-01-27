@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate.utils;
+package msk.android.academy.Steps.utils;
 
 public class StepsItem {
 

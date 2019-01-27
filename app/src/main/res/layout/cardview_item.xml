@@ -20,27 +20,42 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/small_padding12">
+            android:paddingStart="@dimen/small_padding18"
+            android:paddingTop="@dimen/small_padding12"
+            android:paddingEnd="@dimen/small_padding12">
 
-            <TextView
-                android:id="@+id/date"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size18"
-                android:textStyle="normal"
-                tools:text="@tools:sample/date/ddmmyy" />
+                android:layout_gravity="start"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/goal"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size18"
+                    android:textStyle="normal"
+                    tools:text="@tools:sample/date/ddmmyy" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/big_padding48"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size16"
-                tools:text="@tools:sample/cities" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/goal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16"
+                    tools:text="@tools:sample/cities" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -55,16 +70,17 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="false"
-                android:padding="@dimen/small_padding12"
+                android:padding="@dimen/small_padding18"
+                android:progressBackgroundTint="#0B4C5F"
                 android:progressTint="#81DAF5"
-                android:secondaryProgressTint="#0B4C5F" />
-
+                android:secondaryProgressTint="@color/deep_blue" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/small_padding12">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -77,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size14"
+                    android:textSize="@dimen/text_size16"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView
@@ -101,7 +117,7 @@
                     android:paddingStart="@dimen/big_padding48"
                     android:paddingEnd="@dimen/big_padding48"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size14"
+                    android:textSize="@dimen/text_size16"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView
@@ -125,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size14"
+                    android:textSize="@dimen/text_size16"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView
@@ -138,31 +154,40 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/goal_reached_block"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/medium_padding32"
-            android:layout_marginEnd="@dimen/medium_padding32"
-            android:orientation="horizontal">
+            android:layout_marginStart="@dimen/small_padding18"
+            android:layout_marginEnd="@dimen/small_padding18"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/light_light_gray"
-                android:paddingStart="@dimen/big_padding48"
-                android:paddingEnd="@dimen/big_padding48" />
+                android:background="@color/light_light_gray" />
 
             <TextView
+                android:id="@+id/goalReached"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="@dimen/small_padding8"
                 android:paddingBottom="@dimen/small_padding12"
                 android:text="@string/Goal_reached"
                 android:textColor="#0B4C5F"
-                android:textSize="@dimen/text_size16" />
+                android:textSize="@dimen/text_size18" />
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:paddingTop="@dimen/small_padding8">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/star" />
+            </LinearLayout>
         </RelativeLayout>
 
         <View

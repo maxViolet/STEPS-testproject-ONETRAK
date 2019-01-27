@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_size16">16sp</dimen>
-    <dimen name="big_padding48">48dp</dimen>
-    <dimen name="small_padding12">12dp</dimen>
-    <dimen name="one_dp">1dp</dimen>
     <dimen name="zero">0dp</dimen>
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="small_padding8">8dp</dimen>
+    <dimen name="small_padding12">12dp</dimen>
+    <dimen name="small_padding18">18dp</dimen>
     <dimen name="medium_padding32">32dp</dimen>
+    <dimen name="big_padding48">48dp</dimen>
+
+    <dimen name="text_size16">16sp</dimen>
     <dimen name="text_size18">18sp</dimen>
     <dimen name="text_size14">14sp</dimen>
+    <dimen name="medium_padding24">24dp</dimen>
 </resources>

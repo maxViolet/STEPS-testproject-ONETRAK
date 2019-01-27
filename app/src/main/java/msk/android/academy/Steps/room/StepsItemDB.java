@@ -1,4 +1,4 @@
-package msk.android.academy.javatemplate.room;
+package msk.android.academy.Steps.room;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
