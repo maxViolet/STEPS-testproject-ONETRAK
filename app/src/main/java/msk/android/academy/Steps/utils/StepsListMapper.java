@@ -8,7 +8,7 @@ import java.util.List;
 import msk.android.academy.Steps.network.StepsItemDTO;
 import msk.android.academy.Steps.room.StepsItemDB;
 
-public class Mapper {
+public class StepsListMapper {
 
     public static List<StepsItemDB> DtoToDb(List<StepsItemDTO> listDto) {
 
@@ -23,8 +23,8 @@ public class Mapper {
                             item_dto.getRun()
                     )
             );
-            Log.d("room", "items added to DB: " + item_dto.getDate() + " | "
-                    + "[ " + item_dto.getWalk() + ", " + item_dto.getAerobic() + ", " + item_dto.getRun() + " ]");
+//            Log.d("room", "items added to DB: " + item_dto.getDate() + " | "
+//                    + "[ " + item_dto.getWalk() + ", " + item_dto.getAerobic() + ", " + item_dto.getRun() + " ]");
         }
         return list;
     }

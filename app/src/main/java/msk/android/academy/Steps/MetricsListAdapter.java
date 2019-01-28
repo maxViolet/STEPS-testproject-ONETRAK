@@ -18,14 +18,11 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
     @NonNull
     private List<StepsItem> metrics;
     private final LayoutInflater inflater;
-//    @NonNull
-//    private final newsItemClickListener clickListener;
 
     public MetricsListAdapter(@NonNull Context context,
                               @NonNull List<StepsItem> metrics) {
         this.metrics = metrics;
         this.inflater = LayoutInflater.from(context);
-//        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -46,7 +43,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         return metrics.size();
     }
 
-    public void replaceItems(@NonNull List<StepsItem> stepsItems) {
+    void replaceItems(@NonNull List<StepsItem> stepsItems) {
         metrics.clear();
         metrics.addAll(stepsItems);
         notifyDataSetChanged();
@@ -55,10 +52,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
     public void add(List<StepsItem> stepsItems) {
         this.metrics.addAll(stepsItems);
     }
-
-//    public interface newsItemClickListener {
-//        void onItemClick(StepsItemDTO item);
-//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView dateView;
@@ -72,19 +65,13 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            itemView.setOnClickListener(view -> {
-//                int position = getAdapterPosition();
-//                if (position != RecyclerView.NO_POSITION) {
-//                    clickListener.onItemClick(news.get(position));
-//                }
-//            });
-            dateView = (TextView) itemView.findViewById(R.id.date);
-            goalView = (TextView) itemView.findViewById(R.id.goal);
-            int_walkView = (TextView) itemView.findViewById(R.id.walk);
-            int_aerobicView = (TextView) itemView.findViewById(R.id.aerobic);
-            int_runView = (TextView) itemView.findViewById(R.id.run);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar);
-            goalReachedBlock = (RelativeLayout) itemView.findViewById(R.id.goal_reached_block);
+            dateView = itemView.findViewById(R.id.date);
+            goalView = itemView.findViewById(R.id.goal);
+            int_walkView = itemView.findViewById(R.id.walk);
+            int_aerobicView = itemView.findViewById(R.id.aerobic);
+            int_runView = itemView.findViewById(R.id.run);
+            progressBar = itemView.findViewById(R.id.progressbar);
+            goalReachedBlock = itemView.findViewById(R.id.goal_reached_block);
         }
 
         void bind(StepsItem stepsItem) {
@@ -102,16 +89,14 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
             setProgressBar(i, j, k);
 
-            //показывать достижение цели на день при выполнении
             if (getSumm(stepsItem) >= stepsItem.getGoal()) {
                 goalReachedBlock.setVisibility(View.VISIBLE);
             }
         }
 
         private int getSumm(StepsItem stepsItem) {
-            int summ = Integer.parseInt(String.valueOf(stepsItem.getWalk())) +
+            return Integer.parseInt(String.valueOf(stepsItem.getWalk())) +
                     Integer.parseInt(String.valueOf(stepsItem.getAerobic())) + Integer.parseInt(String.valueOf(stepsItem.getRun()));
-            return summ;
         }
 
         private void setProgressBar(double i, double j, double k) {
@@ -126,7 +111,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             //минимальное отображение величины
             if (j != 0 && j < 1) progressBar.setSecondaryProgress((int) (i + 1));
 
-//            if (k != 0) progressBar.tint;
         }
     }
 }

@@ -10,32 +10,30 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public final class Api {
-
-    private final String URL = "https://intern-f6251.firebaseio.com";
+public final class ApiHolder {
+    private final String STEPS_URL = "https://intern-f6251.firebaseio.com";
     private final int TIMEOUT_IN_SECONDS = 2;
 
-    private final Endpoint stepsEndpoint;
-    private static Api sRestApi;
+    private final StepsApi stepsEndpoint;
+    private static ApiHolder sRestApi;
 
-    public static synchronized Api getInstance() {
+    public static synchronized ApiHolder getInstance() {
         if (sRestApi == null) {
-            sRestApi = new Api();
+            sRestApi = new ApiHolder();
         }
         return sRestApi;
     }
 
-    private Api() {
+    private ApiHolder() {
         final OkHttpClient httpClient = buildOkHttpClient();
-        final Retrofit retrofit = buildRetrofitClient(httpClient);
-
-        stepsEndpoint = retrofit.create(Endpoint.class);
+        final Retrofit retrofit = buildRetrofitClient(httpClient, STEPS_URL);
+        stepsEndpoint = retrofit.create(StepsApi.class);
     }
 
     @NonNull
-    private Retrofit buildRetrofitClient(@NonNull OkHttpClient client) {
+    private Retrofit buildRetrofitClient(@NonNull OkHttpClient client, String url) {
         return new Retrofit.Builder()
-                .baseUrl(URL)
+                .baseUrl(url)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -49,13 +47,11 @@ public final class Api {
 
         return new OkHttpClient.Builder()
                 .connectTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
-//                .addInterceptor(ApiKeyInterceptor.create(API_KEY))
                 .addInterceptor(networkLogInterceptor)
                 .build();
     }
 
-    public Endpoint stepsEndpoint() {
+    public StepsApi stepsApi() {
         return stepsEndpoint;
     }
-
 }

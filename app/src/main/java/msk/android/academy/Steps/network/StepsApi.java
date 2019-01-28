@@ -7,10 +7,8 @@ import java.util.List;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 
-public interface Endpoint {
+public interface StepsApi {
     @NonNull
     @GET("/intern/metric.json")
-//    Single<Response> getSingleMetrics();
     Single<List<StepsItemDTO>> getMetrics();
-
 }

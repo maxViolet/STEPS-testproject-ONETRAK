@@ -24,7 +24,7 @@
             android:orientation="horizontal"
             android:paddingStart="@dimen/small_padding18"
             android:paddingTop="@dimen/small_padding12"
-            android:paddingEnd="@dimen/small_padding12">
+            android:paddingEnd="@dimen/small_padding18">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size16"
+                    android:textSize="@dimen/text_size18"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView
@@ -117,7 +117,7 @@
                     android:paddingStart="@dimen/big_padding48"
                     android:paddingEnd="@dimen/big_padding48"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size16"
+                    android:textSize="@dimen/text_size18"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size16"
+                    android:textSize="@dimen/text_size18"
                     tools:text="@tools:sample/us_zipcodes" />
 
                 <TextView

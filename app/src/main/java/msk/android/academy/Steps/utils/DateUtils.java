@@ -8,10 +8,7 @@ public class DateUtils {
 
     public static String formatDateFromDb(long sDate){
         Date d = new Date(sDate);
-
-        String output = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).format(d);
-
-        return output;
+        return new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH).format(d);
     }
 }
 
