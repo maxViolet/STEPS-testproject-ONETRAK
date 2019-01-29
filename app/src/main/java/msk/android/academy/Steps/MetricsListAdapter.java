@@ -6,13 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
-import msk.android.academy.Steps.utils.StepsItem;
+import msk.android.academy.Steps.utils.*;
 
 public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.ViewHolder> {
     @NonNull
@@ -63,6 +64,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         private ProgressBar progressBar;
         private RelativeLayout goalReachedBlock;
 
+//        private LinearLayout testView;
+
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             dateView = itemView.findViewById(R.id.date);
@@ -72,6 +75,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             int_runView = itemView.findViewById(R.id.run);
             progressBar = itemView.findViewById(R.id.progressbar);
             goalReachedBlock = itemView.findViewById(R.id.goal_reached_block);
+
+//            testView=itemView.findViewById(R.id.test_view);
         }
 
         void bind(StepsItem stepsItem) {
@@ -111,6 +116,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             //минимальное отображение величины
             if (j != 0 && j < 1) progressBar.setSecondaryProgress((int) (i + 1));
 
+//            testView.addView(CustomProgressBar());
         }
+
     }
 }

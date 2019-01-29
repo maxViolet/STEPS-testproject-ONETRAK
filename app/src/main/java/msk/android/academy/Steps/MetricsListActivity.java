@@ -3,8 +3,9 @@ package msk.android.academy.Steps;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,27 +17,32 @@ import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.Steps.network.ApiHolder;
 import msk.android.academy.Steps.room.Repository;
 import msk.android.academy.Steps.room.StepsItemDB;
+import msk.android.academy.Steps.utils.CustomProgressBar;
 import msk.android.academy.Steps.utils.DensityPixelMath;
 import msk.android.academy.Steps.utils.StepsListMapper;
 import msk.android.academy.Steps.utils.RecyclerItemDecorator;
-import msk.android.academy.Steps.utils.StepsItem;
+import msk.android.academy.Steps.utils.*;
 
 public class MetricsListActivity extends AppCompatActivity {
 
     private static int MARGIN_RECYCLERVIEW = 80;
-    private RecyclerView rv;
+    private RecyclerView recyclerView;
     private MetricsListAdapter adapter;
     private Repository stepsRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private LinearLayout testView;
+//    private CustomProgressBar customProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         stepsRepository = new Repository(this);
+//        customProgressBar = new CustomProgressBar(this);
 
         setupRecycler();
-        loadMetricsToDb();
+        loadAndShowMetrics();
+//        testView.addView(customProgressBar);
     }
 
     @Override
@@ -46,19 +52,20 @@ public class MetricsListActivity extends AppCompatActivity {
     }
 
     public void setupRecycler() {
-        rv = findViewById(R.id.recycler);
-        adapter = new MetricsListAdapter(this, new ArrayList<StepsItem>());
+        recyclerView = findViewById(R.id.recycler);
+        testView = findViewById(R.id.test_view);
+
+        adapter = new MetricsListAdapter(this, new ArrayList<>());
 
         DensityPixelMath DPmath = new DensityPixelMath(this);
         RecyclerItemDecorator decoration = new RecyclerItemDecorator((int) DPmath.dpFromPx(MARGIN_RECYCLERVIEW), 1);
 
-        rv.setAdapter(adapter);
-        rv.addItemDecoration(decoration);
-
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(decoration);
     }
 
-    private void loadMetricsToDb() {
-//        Log.d("database", "load metrics START");
+    private void loadAndShowMetrics() {
+//        Log.d("loadAndShowMetrics", "load metrics START");
         final Disposable loadDisposable = ApiHolder.getInstance()
                 .stepsApi()
                 .getMetrics()
@@ -70,13 +77,20 @@ public class MetricsListActivity extends AppCompatActivity {
                 .map(stepsItems -> StepsListMapper.DbToItem(stepsItems))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(items -> replaceItems(items),
-                        throwable -> Log.d("rv", throwable.toString()));
-//        Log.d("database", "load metrics END");
+                .subscribe(items -> showMetrics(items),
+                        throwable -> Log.d("loadAndShowMetrics", throwable.toString())
+                );
+//        Log.d("loadAndShowMetrics", "load metrics END");
         compositeDisposable.add(loadDisposable);
     }
 
-    private void replaceItems(List<StepsItem> stepsItems) {
+    private void showMetrics(List<StepsItem> stepsItems) {
         if (adapter != null) adapter.replaceItems(stepsItems);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+        return true;
     }
 }

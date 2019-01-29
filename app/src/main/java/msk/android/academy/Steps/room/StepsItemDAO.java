@@ -15,9 +15,6 @@ public interface StepsItemDAO {
     @Query("SELECT * FROM stepsItemDB")
     List<StepsItemDB> getAllMetrics();
 
-//    @Query("SELECT * FROM stepsItemDB")
-//    Observable<List<StepsItemDB>> getMetricsObservable();
-
     @Query("SELECT * FROM stepsItemDB")
     Flowable<List<StepsItemDB>> getMetricsFlowable();
 

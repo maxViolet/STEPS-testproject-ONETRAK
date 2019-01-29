@@ -16,20 +16,6 @@ public class Repository {
         this.mContext = mContext;
     }
 
-//    public Single<List<StepsItemDB>> getSingleMetrics() {
-//        return Single.fromCallable(() -> {
-//            AppDatabase db = AppDatabase.getAppDatabase(mContext);
-//
-//            return db.stepsItemDAO().getAllMetrics();
-//        });
-//    }
-
-//    public List<StepsItemDB> getListMetrics() {
-//        AppDatabase db = AppDatabase.getAppDatabase(mContext);
-//
-//        return db.stepsItemDAO().getAllMetrics();
-//    }
-
     public Completable saveData(final List<StepsItemDB> stepsItemDBs) {
         Log.d("room", "Repository.class - DATA SAVED to DB");
         return Completable.fromCallable((Callable<Void>) () -> {
@@ -40,11 +26,6 @@ public class Repository {
             return null;
         });
     }
-
-//    public Observable<List<StepsItemDB>> getObservableMetrics() {
-//        AppDatabase db = AppDatabase.getAppDatabase(mContext);
-//        return db.stepsItemDAO().getMetricsObservable();
-//    }
 
     public Flowable<List<StepsItemDB>> getFlowableMetrics() {
         AppDatabase db = AppDatabase.getAppDatabase(mContext);

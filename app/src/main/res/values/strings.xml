@@ -4,4 +4,6 @@
     <string name="aerobic">aerobic</string>
     <string name="run">run</string>
     <string name="Goal_reached">Goal reached</string>
+    <string name="goal">goal</string>
+    <string name="add">add</string>
 </resources>

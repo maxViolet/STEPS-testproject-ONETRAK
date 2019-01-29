@@ -74,6 +74,7 @@
                 android:progressBackgroundTint="#0B4C5F"
                 android:progressTint="#81DAF5"
                 android:secondaryProgressTint="@color/deep_blue" />
+
         </LinearLayout>
 
         <LinearLayout
