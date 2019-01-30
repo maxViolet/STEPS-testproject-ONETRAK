@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/test_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_padding32"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/text_size18"
-        android:paddingEnd="@dimen/text_size18">
-
-        <msk.android.academy.Steps.utils.CustomProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center" />
-
-    </LinearLayout>
-
     <android.support.v7.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/recycler"
         android:layout_width="match_parent"

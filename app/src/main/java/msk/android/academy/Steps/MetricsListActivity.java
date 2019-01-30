@@ -1,8 +1,10 @@
 package msk.android.academy.Steps;
 
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.LinearLayout;
@@ -30,7 +32,7 @@ public class MetricsListActivity extends AppCompatActivity {
     private MetricsListAdapter adapter;
     private Repository stepsRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private LinearLayout testView;
+//    private LinearLayout testView;
 //    private CustomProgressBar customProgressBar;
 
     @Override
@@ -38,10 +40,15 @@ public class MetricsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         stepsRepository = new Repository(this);
+
 //        customProgressBar = new CustomProgressBar(this);
+//        customProgressBar.setI(33);
+//        customProgressBar.setJ(22);
 
         setupRecycler();
         loadAndShowMetrics();
+
+//        testView = findViewById(R.id.test_view);
 //        testView.addView(customProgressBar);
     }
 
@@ -53,7 +60,6 @@ public class MetricsListActivity extends AppCompatActivity {
 
     public void setupRecycler() {
         recyclerView = findViewById(R.id.recycler);
-        testView = findViewById(R.id.test_view);
 
         adapter = new MetricsListAdapter(this, new ArrayList<>());
 

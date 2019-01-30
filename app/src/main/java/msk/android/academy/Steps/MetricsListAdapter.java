@@ -56,7 +56,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView dateView;
-        private TextView summView;
         private TextView goalView;
         private TextView int_walkView;
         private TextView int_aerobicView;
@@ -64,7 +63,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         private ProgressBar progressBar;
         private RelativeLayout goalReachedBlock;
 
-//        private LinearLayout testView;
+        private LinearLayout testView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,7 +75,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             progressBar = itemView.findViewById(R.id.progressbar);
             goalReachedBlock = itemView.findViewById(R.id.goal_reached_block);
 
-//            testView=itemView.findViewById(R.id.test_view);
+            testView = itemView.findViewById(R.id.test_view);
         }
 
         void bind(StepsItem stepsItem) {
@@ -105,18 +104,34 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         }
 
         private void setProgressBar(double i, double j, double k) {
+            CustomProgressBar customProgressBar = new CustomProgressBar(itemView.getContext());
             progressBar.setScaleY(2f);
-            if (i != 0 && i > 1) progressBar.setProgress((int) i);
+
+            if (i != 0 && i > 1) {
+                progressBar.setProgress((int) i);
+                customProgressBar.setI((int) i);
+            }
 
             //минимальное отображение величины
-            if (i != 0 && i < 1) progressBar.setProgress(1);
+            if (i != 0 && i < 1) {
+                progressBar.setProgress(1);
+                customProgressBar.setI(2);
+            }
 
-            if (j != 0 && j > 1) progressBar.setSecondaryProgress((int) (i + j));
+            if (j != 0 && j > 1) {
+                progressBar.setSecondaryProgress((int) (i + j));
+                customProgressBar.setJ((int) j);
+            }
 
             //минимальное отображение величины
-            if (j != 0 && j < 1) progressBar.setSecondaryProgress((int) (i + 1));
+            if (j != 0 && j < 1) {
+                progressBar.setSecondaryProgress((int) (i + 1));
+                customProgressBar.setJ(2);
+            }
 
-//            testView.addView(CustomProgressBar());
+//            customProgressBar.setI((int) i);
+//            customProgressBar.setJ((int) j);
+            testView.addView(customProgressBar);
         }
 
     }
