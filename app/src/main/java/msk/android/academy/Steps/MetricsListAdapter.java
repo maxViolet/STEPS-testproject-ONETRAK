@@ -105,32 +105,24 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
         private void setProgressBar(double i, double j, double k) {
             CustomProgressBar customProgressBar = new CustomProgressBar(itemView.getContext());
-            progressBar.setScaleY(2f);
 
             if (i != 0 && i > 1) {
-                progressBar.setProgress((int) i);
                 customProgressBar.setI((int) i);
             }
 
             //минимальное отображение величины
             if (i != 0 && i < 1) {
-                progressBar.setProgress(1);
                 customProgressBar.setI(2);
             }
 
             if (j != 0 && j > 1) {
-                progressBar.setSecondaryProgress((int) (i + j));
                 customProgressBar.setJ((int) j);
             }
 
             //минимальное отображение величины
             if (j != 0 && j < 1) {
-                progressBar.setSecondaryProgress((int) (i + 1));
                 customProgressBar.setJ(2);
             }
-
-//            customProgressBar.setI((int) i);
-//            customProgressBar.setJ((int) j);
             testView.addView(customProgressBar);
         }
 
