@@ -2,20 +2,14 @@ package msk.android.academy.Steps.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ComplexColorCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Queue;
 
 import io.reactivex.annotations.Nullable;
 import msk.android.academy.Steps.R;
@@ -79,16 +73,17 @@ public class CustomProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         initValues();
+        //координата Х последнего элемента
         float tempX = 0;
         //кривизна краев прогресс бара (визуально отображается только для функции drawCircle)
         float curve = (float) 1.4;
         //величина разделителя сегментов
-        float gap = (getWidth() / 110);
+        float gapSize = (getWidth() / 110);
         //координата Х для отрисовки круга/арки
         float circleCenterX = (getWidth() / 100);
         float h = getHeight();
         float w = getWidth();
-        //радиус круга
+        //радиус круга (закругдения краев)
         float r = circleCenterX * curve;
         Integer currentColor;
 
@@ -97,40 +92,37 @@ public class CustomProgressBar extends View {
                 //первый сегмент
                 currentColor = getColor();
                 paint.setColor(ContextCompat.getColor(context, R.color.color_walk));
-                //отрисовка circle
-                drawArc(canvas,0,0, 2*r, h,90,180 );
-                tempX = (float) (circleCenterX * curve);
-
+                //отрисовка arc
+                drawArc(canvas, 0, 0, 2 * r, h, 90);
+                tempX = r;
                 //отрисовка прямоугольника того же цвета
-                canvas.drawRect(tempX, 0, tempX + (w * valueList.get(k) / 100), h, paint);
+                drawRectangle(canvas, tempX, tempX + (w * valueList.get(k) / 100), h);
                 tempX = tempX + (w * valueList.get(k) / 100);
                 //gap
-                paint.setColor(ContextCompat.getColor(context, R.color.white));
-                canvas.drawRect(tempX, 0, tempX + gap, h / 2, paint);
-                tempX += gap;
+                drawGap(canvas, tempX, gapSize, h);
+                tempX += gapSize;
 
             } else if (k == SEGMENT_NUMBER - 1) {
                 //последний сегмент
                 currentColor = getColor();
                 paint.setColor(ContextCompat.getColor(context, R.color.color_run));
                 //отрисовка прямоугольника
-                canvas.drawRect(tempX, 0, (float) (w - (circleCenterX * curve)), h, paint);
-                tempX = (float) (w - r);
-                //отрисовка circle того же цвета
-                drawArc(canvas,tempX-r,0, w, h,270,180 );
+                drawRectangle(canvas, tempX, w - r, h);
+                tempX = w - r;
+                //отрисовка arc того же цвета
+                drawArc(canvas, tempX - r, 0, w, h, 270);
             } else {
                 //промежуточный сегмент
                 currentColor = getColor();
                 paint.setColor(ContextCompat.getColor(context, R.color.color_aerobic));
                 //отрисовка прямоугольника
-                canvas.drawRect(tempX, 0, tempX + (w * valueList.get(k) / 100), h, paint);
+                drawRectangle(canvas, tempX, tempX + (w * valueList.get(k) / 100), h);
                 tempX += (w * valueList.get(k) / 100);
                 //gap
                 paint.setColor(ContextCompat.getColor(context, R.color.white));
-                canvas.drawRect(tempX, 0, tempX + gap, h / 2, paint);
-                tempX += gap;
+                drawGap(canvas, tempX, gapSize, h);
+                tempX += gapSize;
             }
-
         }
     }
 
@@ -138,20 +130,20 @@ public class CustomProgressBar extends View {
         canvas.drawCircle(centerX, centerY, radius, paint);
     }
 
-    private void drawArc(Canvas canvas, float left, float top, float right, float h, int startAngle, int sweep) {
-        canvas.drawArc(left, top, right, h, startAngle, sweep, true, paint);
+    private void drawArc(Canvas canvas, float left, float top, float right, float h, int startAngle) {
+        canvas.drawArc(left, top, right, h, startAngle, 180, true, paint);
     }
 
-    private void drawRectangle() {
-        //TODO
+    private void drawRectangle(Canvas canvas, float start, float end, float h) {
+        canvas.drawRect(start, 0, end, h, paint);
     }
 
-    private void drawGap() {
-        //TODO
+    private void drawGap(Canvas canvas, float start, float gap, float h) {
+        paint.setColor(ContextCompat.getColor(context, R.color.white));
+        canvas.drawRect(start, 0, start + gap, h, paint);
     }
 
     private Integer getColor() {
-
         //возвращаем цвет и добавляем его обратно в очередь
         Integer temp = colorQueue.poll();
         colorQueue.offer(temp);
@@ -167,18 +159,17 @@ public class CustomProgressBar extends View {
         valueList.add(j);
         valueList.add(k);
 
-//        if (colorQueue == null) {
         //заполнить список
         for (int h = 1; h <= SEGMENT_NUMBER; h++) {
             colorList.add(COLOR1);
             colorList.add(COLOR2);
             colorList.add(COLOR3);
-//            }
-            //заполнить очередь
-            for (int t = 0; t < colorList.size(); t++) {
-                if (colorQueue != null) {
-                    colorQueue.offer(colorList.get(t));
-                }
+        }
+        //заполнить очередь
+        for (int t = 0; t < colorList.size(); t++) {
+            if (colorQueue != null) {
+                colorQueue.offer(colorList.get(t));
+
             }
         }
     }
