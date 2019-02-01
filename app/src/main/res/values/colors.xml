@@ -7,4 +7,8 @@
     <color name="light_light_gray">#e0e0e0</color>
     <color name="black">#000000</color>
     <color name="deep_blue">#1c0a63</color>
+    <color name="color_walk">#81DAF5</color>
+    <color name="color_aerobic">#008db9</color>
+    <color name="color_run">#1c0a63</color>
+    <color name="white">#ffffff</color>
 </resources>

@@ -1,13 +1,10 @@
 package msk.android.academy.Steps;
 
-import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,6 @@ import io.reactivex.schedulers.Schedulers;
 import msk.android.academy.Steps.network.ApiHolder;
 import msk.android.academy.Steps.room.Repository;
 import msk.android.academy.Steps.room.StepsItemDB;
-import msk.android.academy.Steps.utils.CustomProgressBar;
 import msk.android.academy.Steps.utils.DensityPixelMath;
 import msk.android.academy.Steps.utils.StepsListMapper;
 import msk.android.academy.Steps.utils.RecyclerItemDecorator;
@@ -32,8 +28,6 @@ public class MetricsListActivity extends AppCompatActivity {
     private MetricsListAdapter adapter;
     private Repository stepsRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-//    private LinearLayout testView;
-//    private CustomProgressBar customProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +35,15 @@ public class MetricsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         stepsRepository = new Repository(this);
 
-//        customProgressBar = new CustomProgressBar(this);
-//        customProgressBar.setI(33);
-//        customProgressBar.setJ(22);
-
         setupRecycler();
         loadAndShowMetrics();
-
-//        testView = findViewById(R.id.test_view);
-//        testView.addView(customProgressBar);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         compositeDisposable.clear();
+        stepsRepository = null;
     }
 
     public void setupRecycler() {
