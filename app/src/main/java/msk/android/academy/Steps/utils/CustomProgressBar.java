@@ -83,7 +83,7 @@ public class CustomProgressBar extends View {
         float circleCenterX = (getWidth() / 100);
         float h = getHeight();
         float w = getWidth();
-        //радиус круга (закругдения краев)
+        //радиус круга (закруления краев)
         float r = circleCenterX * curve;
         Integer currentColor;
 
@@ -112,7 +112,7 @@ public class CustomProgressBar extends View {
                 //отрисовка arc того же цвета
                 drawArc(canvas, tempX - r, 0, w, h, 270);
             } else {
-                //промежуточный сегмент
+                //промежуточные сегменты
                 currentColor = getColor();
                 paint.setColor(ContextCompat.getColor(context, R.color.color_aerobic));
                 //отрисовка прямоугольника
