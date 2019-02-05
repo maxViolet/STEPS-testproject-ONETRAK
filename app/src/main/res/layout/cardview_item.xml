@@ -62,26 +62,6 @@
         <LinearLayout
             android:id="@+id/progressbarContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:indeterminate="false"
-                android:padding="@dimen/small_padding18"
-                android:progressBackgroundTint="#0B4C5F"
-                android:progressTint="#81DAF5"
-                android:secondaryProgressTint="@color/deep_blue" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/test_view2"
-            android:layout_width="match_parent"
             android:layout_height="@dimen/medium_padding32"
             android:layout_gravity="center"
             android:orientation="horizontal"
@@ -89,11 +69,13 @@
             android:paddingEnd="@dimen/small_padding18">
 
             <LinearLayout
-                android:id="@+id/test_view"
+                android:id="@+id/progressBar"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="8dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal"></LinearLayout>
+                android:orientation="horizontal">
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

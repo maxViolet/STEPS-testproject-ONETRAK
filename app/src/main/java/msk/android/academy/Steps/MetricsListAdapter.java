@@ -74,7 +74,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             int_aerobicView = itemView.findViewById(R.id.aerobic);
             int_runView = itemView.findViewById(R.id.run);
             goalReachedBlock = itemView.findViewById(R.id.goal_reached_block);
-            customProgressBarView = itemView.findViewById(R.id.test_view);
+            customProgressBarView = itemView.findViewById(R.id.progressBar);
         }
 
         void bind(StepsItem stepsItem) {
@@ -105,7 +105,6 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         private void setProgressBar(double i, double j, double k) {
             CustomProgressBar customProgressBar = new CustomProgressBar(itemView.getContext());
             AnimatorSet animSet = new AnimatorSet();
-            AccelerateDecelerateInterpolator a = new AccelerateDecelerateInterpolator();
 
             if (i != 0 && i > 1) {
                 customProgressBar.setI((int) i);
@@ -123,10 +122,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             }
             ObjectAnimator animI = ObjectAnimator.ofInt(customProgressBar, "i", 2, (int) i);
             animI.setDuration(1500);
-            animI.setInterpolator(a);
             ObjectAnimator animJ = ObjectAnimator.ofInt(customProgressBar, "j", 2, (int) j);
             animJ.setDuration(1500);
-            animJ.setInterpolator(a);
             animSet.playTogether(animI, animJ);
             animSet.start();
             customProgressBarView.addView(customProgressBar);

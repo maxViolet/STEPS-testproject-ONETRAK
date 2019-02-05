@@ -134,8 +134,8 @@ public class CustomProgressBar extends View {
                 tempX += gapSize;
                 paint.setColor(ContextCompat.getColor(context, R.color.color_aerobic));
                 //отрисовка прямоугольника
-                drawRectangle(canvas, tempX, tempX + (w * valueList.get(k) / 100)+gapSize);
-                tempX += (w * valueList.get(k) / 100)+gapSize;
+                drawRectangle(canvas, tempX, tempX + (w * valueList.get(k) / 100) + gapSize);
+                tempX += (w * valueList.get(k) / 100) + gapSize;
                 //gap
                 paint.setColor(ContextCompat.getColor(context, R.color.white));
                 drawGap(canvas, tempX, gapSize);
@@ -170,7 +170,7 @@ public class CustomProgressBar extends View {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         valueList = new ArrayList<>();
 
-        rect = new AnimatableRectF();
+//        rect = new AnimatableRectF();
 
         valueList.add(i);
         valueList.add(j);
@@ -206,10 +206,10 @@ public class CustomProgressBar extends View {
     }
 
     //TODO применить Rect вместо AnimatableRectF, использовать getter'ы для записи в tempX
-   //nested class with setter for X coordinate
+    //nested class with setter for X coordinate
     private class AnimatableRectF extends RectF {
 
-       public AnimatableRectF() {
+        public AnimatableRectF() {
             super();
         }
 
@@ -242,7 +242,7 @@ public class CustomProgressBar extends View {
         }
     }
 
-    public AnimatableRectF buildAnimRectF(float l,float t,float r,float b) {
-        return new AnimatableRectF(l,t,r,b);
+    public AnimatableRectF buildAnimRectF(float l, float t, float r, float b) {
+        return new AnimatableRectF(l, t, r, b);
     }
 }
