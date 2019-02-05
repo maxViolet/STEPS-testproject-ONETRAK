@@ -60,16 +60,17 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/progressbarContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"            >
+            android:visibility="gone">
 
             <ProgressBar
                 android:id="@+id/progressbar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
                 android:indeterminate="false"
                 android:padding="@dimen/small_padding18"
                 android:progressBackgroundTint="#0B4C5F"
@@ -92,8 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
-            </LinearLayout>
+                android:orientation="horizontal"></LinearLayout>
         </LinearLayout>
 
         <LinearLayout

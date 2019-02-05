@@ -1,13 +1,16 @@
 package msk.android.academy.Steps;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.Interpolator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -60,10 +63,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
         private TextView int_walkView;
         private TextView int_aerobicView;
         private TextView int_runView;
-        private ProgressBar progressBar;
         private RelativeLayout goalReachedBlock;
-
-        private LinearLayout testView;
+        private LinearLayout customProgressBarView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,10 +73,8 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             int_walkView = itemView.findViewById(R.id.walk);
             int_aerobicView = itemView.findViewById(R.id.aerobic);
             int_runView = itemView.findViewById(R.id.run);
-            progressBar = itemView.findViewById(R.id.progressbar);
             goalReachedBlock = itemView.findViewById(R.id.goal_reached_block);
-
-            testView = itemView.findViewById(R.id.test_view);
+            customProgressBarView = itemView.findViewById(R.id.test_view);
         }
 
         void bind(StepsItem stepsItem) {
@@ -105,26 +104,32 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
         private void setProgressBar(double i, double j, double k) {
             CustomProgressBar customProgressBar = new CustomProgressBar(itemView.getContext());
+            AnimatorSet animSet = new AnimatorSet();
+            AccelerateDecelerateInterpolator a = new AccelerateDecelerateInterpolator();
 
             if (i != 0 && i > 1) {
                 customProgressBar.setI((int) i);
             }
-
             //минимальное отображение величины
             if (i != 0 && i < 1) {
                 customProgressBar.setI(2);
             }
-
             if (j != 0 && j > 1) {
                 customProgressBar.setJ((int) j);
             }
-
             //минимальное отображение величины
             if (j != 0 && j < 1) {
                 customProgressBar.setJ(2);
             }
-            testView.addView(customProgressBar);
+            ObjectAnimator animI = ObjectAnimator.ofInt(customProgressBar, "i", 2, (int) i);
+            animI.setDuration(1500);
+            animI.setInterpolator(a);
+            ObjectAnimator animJ = ObjectAnimator.ofInt(customProgressBar, "j", 2, (int) j);
+            animJ.setDuration(1500);
+            animJ.setInterpolator(a);
+            animSet.playTogether(animI, animJ);
+            animSet.start();
+            customProgressBarView.addView(customProgressBar);
         }
-
     }
 }
