@@ -1,4 +1,4 @@
-package msk.android.academy.Steps.room;
+package msk.android.maximFialko.Steps.room;
 
 import android.content.Context;
 import android.util.Log;

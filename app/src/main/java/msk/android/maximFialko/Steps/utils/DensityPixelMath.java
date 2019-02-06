@@ -1,4 +1,4 @@
-package msk.android.academy.Steps.utils;
+package msk.android.maximFialko.Steps.utils;
 
 import android.content.Context;
 

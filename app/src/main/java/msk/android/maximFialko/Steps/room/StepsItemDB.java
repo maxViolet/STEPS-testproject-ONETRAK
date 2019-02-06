@@ -1,4 +1,4 @@
-package msk.android.academy.Steps.room;
+package msk.android.maximFialko.Steps.room;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

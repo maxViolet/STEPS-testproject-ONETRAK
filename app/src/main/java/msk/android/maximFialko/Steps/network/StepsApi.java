@@ -1,4 +1,4 @@
-package msk.android.academy.Steps.network;
+package msk.android.maximFialko.Steps.network;
 
 import android.support.annotation.NonNull;
 

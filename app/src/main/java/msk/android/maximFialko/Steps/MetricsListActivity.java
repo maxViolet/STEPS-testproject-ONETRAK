@@ -1,4 +1,4 @@
-package msk.android.academy.Steps;
+package msk.android.maximFialko.Steps;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,17 +13,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import msk.android.academy.Steps.network.ApiHolder;
-import msk.android.academy.Steps.room.Repository;
-import msk.android.academy.Steps.room.StepsItemDB;
-import msk.android.academy.Steps.utils.DensityPixelMath;
-import msk.android.academy.Steps.utils.StepsListMapper;
-import msk.android.academy.Steps.utils.RecyclerItemDecorator;
-import msk.android.academy.Steps.utils.*;
+import msk.android.maximFialko.Steps.network.ApiHolder;
+import msk.android.maximFialko.Steps.room.Repository;
+import msk.android.maximFialko.Steps.room.StepsItemDB;
+import msk.android.maximFialko.Steps.utils.DensityPixelMath;
+import msk.android.maximFialko.Steps.utils.StepsListMapper;
+import msk.android.maximFialko.Steps.utils.RecyclerItemDecorator;
+import msk.android.maximFialko.Steps.utils.*;
 
 public class MetricsListActivity extends AppCompatActivity {
 
-    private static int MARGIN_RECYCLERVIEW = 80;
+    private static int SPACE_BETWEEN_ITEMS = 80;
     private RecyclerView recyclerView;
     private MetricsListAdapter adapter;
     private Repository stepsRepository;
@@ -52,7 +52,7 @@ public class MetricsListActivity extends AppCompatActivity {
         adapter = new MetricsListAdapter(this, new ArrayList<>());
 
         DensityPixelMath DPmath = new DensityPixelMath(this);
-        RecyclerItemDecorator decoration = new RecyclerItemDecorator((int) DPmath.dpFromPx(MARGIN_RECYCLERVIEW), 1);
+        RecyclerItemDecorator decoration = new RecyclerItemDecorator((int) DPmath.dpFromPx(SPACE_BETWEEN_ITEMS), 1);
 
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(decoration);

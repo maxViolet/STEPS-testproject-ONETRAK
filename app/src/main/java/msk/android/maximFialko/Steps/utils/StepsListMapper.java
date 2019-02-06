@@ -1,12 +1,10 @@
-package msk.android.academy.Steps.utils;
-
-import android.util.Log;
+package msk.android.maximFialko.Steps.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import msk.android.academy.Steps.network.StepsItemDTO;
-import msk.android.academy.Steps.room.StepsItemDB;
+import msk.android.maximFialko.Steps.network.StepsItemDTO;
+import msk.android.maximFialko.Steps.room.StepsItemDB;
 
 public class StepsListMapper {
 
