@@ -68,3 +68,4 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 src/main/res/anim/
+/STEPS-testproject-ONETRAK-.iml

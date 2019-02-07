@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import msk.android.maximFialko.Steps.customProgressBar.CustomProgressBar;
 import msk.android.maximFialko.Steps.utils.*;
 
 public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.ViewHolder> {
@@ -77,18 +78,15 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
         void bind(StepsItem stepsItem) {
             dateView.setText(stepsItem.getDate());
-            String goalText = getSumm(stepsItem) + " / " + String.valueOf(stepsItem.getGoal() + " steps");
 
+            String goalText = getSumm(stepsItem) + " / " + String.valueOf(stepsItem.getGoal() + " steps");
             goalView.setText(goalText);
+
             int_walkView.setText(String.valueOf(stepsItem.getWalk()));
             int_aerobicView.setText(String.valueOf(stepsItem.getAerobic()));
             int_runView.setText(String.valueOf(stepsItem.getRun()));
 
-            double i = ((stepsItem.getWalk() / (double) getSumm(stepsItem)) * 100);
-            double j = ((stepsItem.getAerobic() / (double) getSumm(stepsItem)) * 100);
-            double k = ((stepsItem.getRun() / (double) getSumm(stepsItem)) * 100);
-
-            setProgressBar(i, j, k);
+            setProgressBar(stepsItem.getWalk(), stepsItem.getAerobic(), stepsItem.getRun());
 
             if (getSumm(stepsItem) >= stepsItem.getGoal()) {
                 goalReachedBlock.setVisibility(View.VISIBLE);
@@ -100,30 +98,21 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
                     Integer.parseInt(String.valueOf(stepsItem.getAerobic())) + Integer.parseInt(String.valueOf(stepsItem.getRun()));
         }
 
-        private void setProgressBar(double i, double j, double k) {
-            CustomProgressBar customProgressBar = new CustomProgressBar(itemView.getContext());
+        //setup custom Progress bar
+        private void setProgressBar(int... values) {
+            CustomProgressBar customProgressBar = new CustomProgressBar(itemView.getContext(), values);
             AnimatorSet animSet = new AnimatorSet();
 
-            if (i != 0 && i > 1) {
-                customProgressBar.setI((int) i);
-            }
-            //минимальное отображение величины
-            if (i != 0 && i < 1) {
-                customProgressBar.setI(2);
-            }
-            if (j != 0 && j > 1) {
-                customProgressBar.setJ((int) j);
-            }
-            //минимальное отображение величины
-            if (j != 0 && j < 1) {
-                customProgressBar.setJ(2);
-            }
-            ObjectAnimator animI = ObjectAnimator.ofInt(customProgressBar, "i", 2, (int) i);
-            animI.setDuration(1500);
-            ObjectAnimator animJ = ObjectAnimator.ofInt(customProgressBar, "j", 2, (int) j);
-            animJ.setDuration(1500);
-            animSet.playTogether(animI, animJ);
+            //setup animations
+            ObjectAnimator animIntList1 = ObjectAnimator
+                    .ofInt(customProgressBar, "FirstSegment", 2, customProgressBar.percentValueList.get(0));
+            animIntList1.setDuration(1700);
+            ObjectAnimator animIntList2 = ObjectAnimator
+                    .ofInt(customProgressBar, "SecondSegment", 2, customProgressBar.percentValueList.get(1));
+            animIntList2.setDuration(1700);
+            animSet.playTogether(animIntList1, animIntList2);
             animSet.start();
+
             customProgressBarView.addView(customProgressBar);
         }
     }

@@ -8,12 +8,12 @@
     <item
         android:id="@+id/plus"
         android:orderInCategory="1"
-        android:icon="@drawable/baseline_location_searching_black_24dp"
+        android:icon="@drawable/aim_black_24dp"
         android:title="@string/add"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/aim"
-        android:icon="@drawable/baseline_add_circle_outline_black_24dp"
+        android:icon="@drawable/circle_outline_black_24dp"
         android:title="@string/goal"
         app:showAsAction="ifRoom"
         />

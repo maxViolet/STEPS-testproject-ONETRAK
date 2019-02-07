@@ -42,7 +42,7 @@ public class StepsListMapper {
                             item_db.getRun()
                     )
             );
-//            Log.d("rv", "items added to Adapter: " + item_db.getDate() + " | "
+//            Log.d("room", "items added to Adapter: " + item_db.getDate() + " | "
 //                    + "[ " + item_db.getWalk() + ", " + item_db.getAerobic() + ", " + item_db.getRun() + " ]");
         }
         return list;

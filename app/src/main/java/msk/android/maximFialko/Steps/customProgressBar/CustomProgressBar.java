@@ -1,4 +1,4 @@
-package msk.android.maximFialko.Steps.utils;
+package msk.android.maximFialko.Steps.customProgressBar;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,11 +16,9 @@ import msk.android.maximFialko.Steps.R;
 
 public class CustomProgressBar extends View {
 
-    private static int SEGMENT_NUMBER = 3;
-    private int i;
-    private int j;
-    private int k;
-    private List<Integer> valueList;
+    private static final int MINIMAL_SEGMENT_VALUE = 2;
+
+    public List<Integer> percentValueList;
 
     private static final int COLOR1 = 8510197;
     private static final int COLOR2 = 36281;
@@ -30,6 +28,12 @@ public class CustomProgressBar extends View {
 
     private Paint paint;
     private Context context;
+
+    public CustomProgressBar(Context context, int... values) {
+        super(context);
+        this.context = context;
+        initValues(values);
+    }
 
     public CustomProgressBar(Context context) {
         super(context);
@@ -46,24 +50,18 @@ public class CustomProgressBar extends View {
         this.context = context;
     }
 
-    public void setI(int i) {
-        this.i = i;
+    // сеттеры для взаимодействия с прогресс баром через внешний ObjectAnimator
+    public void setFirstSegment(int i) {
+        this.percentValueList.set(0, i);
         invalidate();
     }
 
-    public void setJ(int j) {
-        this.j = j;
-        invalidate();
-    }
-
-    public void setK(int k) {
-        this.k = k;
-        invalidate();
+    public void setSecondSegment(int j) {
+        this.percentValueList.set(1, j);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        initValues();
         //координата Х последнего элемента
         float tempX = 0;
         //кривизна краев прогресс бара
@@ -77,34 +75,34 @@ public class CustomProgressBar extends View {
         //радиус круга(влияет на закруления краев)
         float r = circleCenterX * curve;
 
-        for (k = 0; k < SEGMENT_NUMBER; k++) {
+        for (int k = 0; k < percentValueList.size(); k++) {
             if (k == 0) {
-                //первый сегмент
+                //first segment
                 paint.setColor(ContextCompat.getColor(context, R.color.color_walk));
-                //отрисовка arc
+                //draw arc
                 drawArc(canvas, 0, 2 * r, h, 90);
                 tempX = r;
-                //отрисовка прямоугольника того же цвета
-                drawRectangle(canvas, tempX, tempX + (w * valueList.get(k) / 100));
-                tempX = tempX + (w * valueList.get(k) / 100);
+                //draw rectangle
+                drawRectangle(canvas, tempX, tempX + (w * percentValueList.get(k) / 100));
+                tempX = tempX + (w * percentValueList.get(k) / 100);
 
-            } else if (k == SEGMENT_NUMBER - 1) {
-                //последний сегмент
+            } else if (k == percentValueList.size() - 1) {
+                //last segment
                 paint.setColor(ContextCompat.getColor(context, R.color.color_run));
-                //отрисовка прямоугольника
+                //draw rectangle
                 drawRectangle(canvas, tempX, w - r);
                 tempX = w - r;
-                //отрисовка arc того же цвета
+                //draw arc
                 drawArc(canvas, tempX - r, w, h, 270);
             } else {
-                //промежуточные сегменты
-                //gap
+                //mid segments
+                //draw gap
                 drawGap(canvas, tempX, gapSize);
                 tempX += gapSize;
                 paint.setColor(ContextCompat.getColor(context, R.color.color_aerobic));
-                //отрисовка прямоугольника
-                drawRectangle(canvas, tempX, tempX + (w * valueList.get(k) / 100) + gapSize);
-                tempX += (w * valueList.get(k) / 100) + gapSize;
+                //draw rectangle
+                drawRectangle(canvas, tempX, tempX + (w * percentValueList.get(k) / 100) + gapSize);
+                tempX += (w * percentValueList.get(k) / 100) + gapSize;
                 //draw gap
                 paint.setColor(ContextCompat.getColor(context, R.color.white));
                 drawGap(canvas, tempX, gapSize);
@@ -133,19 +131,19 @@ public class CustomProgressBar extends View {
         return temp;
     }
 
-    private void initValues() {
+    private void initValues(int... v) {
         colorList = new ArrayList<>();
         colorQueue = new ArrayDeque<>();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        valueList = new ArrayList<>();
+        percentValueList = new ArrayList<>();
 
-        //список значений для сегментов
-        valueList.add(i);
-        valueList.add(j);
-        valueList.add(k);
+        //преобразовать список в пропорции относительно суммы
+        int[] kk = getPercentValues(v);
+        //список конечных значений для отрисовки сегментов
+        for (int i = 0; i < (getPercentValues(v)).length; i++) percentValueList.add(kk[i]);
 
         //заполнить список цветов сегментов
-        for (int h = 1; h <= SEGMENT_NUMBER; h++) {
+        for (int h = 1; h <= percentValueList.size(); h++) {
             colorList.add(COLOR1);
             colorList.add(COLOR2);
             colorList.add(COLOR3);
@@ -156,5 +154,26 @@ public class CustomProgressBar extends View {
                 colorQueue.offer(colorList.get(t));
             }
         }
+    }
+
+    //преобразует аргументы, переданные в конструкторе, в % от общей суммы аргументов
+    private int[] getPercentValues(int... val) {
+        int sum = 0;
+        //get sum of all elements
+        for (int iterator : val) {
+            sum += iterator;
+        }
+
+        int[] percentValues = new int[val.length];
+        //divide each element by summ for % values
+        for (int v = 0; v < val.length; v++) {
+            //проверка на MINIMAL_SEGMENT_VALUE
+            if ((val[v] * 100 / sum) != 0 && (val[v] * 100 / sum) < MINIMAL_SEGMENT_VALUE) {
+                percentValues[v] = MINIMAL_SEGMENT_VALUE;
+            } else {
+                percentValues[v] = val[v] * 100 / sum;
+            }
+        }
+        return percentValues;
     }
 }

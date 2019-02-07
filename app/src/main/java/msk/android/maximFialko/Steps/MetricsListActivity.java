@@ -59,7 +59,6 @@ public class MetricsListActivity extends AppCompatActivity {
     }
 
     private void loadAndShowMetrics() {
-//        Log.d("loadAndShowMetrics", "load metrics START");
         final Disposable loadDisposable = ApiHolder.getInstance()
                 .stepsApi()
                 .getMetrics()
@@ -74,7 +73,6 @@ public class MetricsListActivity extends AppCompatActivity {
                 .subscribe(items -> showMetrics(items),
                         throwable -> Log.d("loadAndShowMetrics", throwable.toString())
                 );
-//        Log.d("loadAndShowMetrics", "load metrics END");
         compositeDisposable.add(loadDisposable);
     }
 
