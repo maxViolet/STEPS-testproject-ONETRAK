@@ -18,6 +18,9 @@ import msk.android.maximFialko.Steps.customProgressBar.CustomProgressBar;
 import msk.android.maximFialko.Steps.utils.*;
 
 public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.ViewHolder> {
+    //custom progress bar animation time in MILLISECONDS
+    private static final int PROGRESSBAR_ANIMATION_DURATION = 1700;
+
     @NonNull
     private List<StepsItem> metrics;
     private final LayoutInflater inflater;
@@ -88,6 +91,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
             setProgressBar(stepsItem.getWalk(), stepsItem.getAerobic(), stepsItem.getRun());
 
+            //set visible block "Goal reached"
             if (getSumm(stepsItem) >= stepsItem.getGoal()) {
                 goalReachedBlock.setVisibility(View.VISIBLE);
             }
@@ -106,10 +110,10 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             //setup animations
             ObjectAnimator animIntList1 = ObjectAnimator
                     .ofInt(customProgressBar, "FirstSegment", 2, customProgressBar.percentValueList.get(0));
-            animIntList1.setDuration(1700);
+            animIntList1.setDuration(PROGRESSBAR_ANIMATION_DURATION);
             ObjectAnimator animIntList2 = ObjectAnimator
                     .ofInt(customProgressBar, "SecondSegment", 2, customProgressBar.percentValueList.get(1));
-            animIntList2.setDuration(1700);
+            animIntList2.setDuration(PROGRESSBAR_ANIMATION_DURATION);
             animSet.playTogether(animIntList1, animIntList2);
             animSet.start();
 

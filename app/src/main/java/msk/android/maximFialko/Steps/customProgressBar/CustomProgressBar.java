@@ -16,16 +16,10 @@ import msk.android.maximFialko.Steps.R;
 
 public class CustomProgressBar extends View {
 
+    //минимальная величина сегмента в %
     private static final int MINIMAL_SEGMENT_VALUE = 2;
 
     public List<Integer> percentValueList;
-
-    private static final int COLOR1 = 8510197;
-    private static final int COLOR2 = 36281;
-    private static final int COLOR3 = 1837667;
-    private ArrayList<Integer> colorList;
-    private ArrayDeque<Integer> colorQueue;
-
     private Paint paint;
     private Context context;
 
@@ -58,6 +52,7 @@ public class CustomProgressBar extends View {
 
     public void setSecondSegment(int j) {
         this.percentValueList.set(1, j);
+        invalidate();
     }
 
     @Override
@@ -66,9 +61,9 @@ public class CustomProgressBar extends View {
         float tempX = 0;
         //кривизна краев прогресс бара
         float curve = (float) 1.4;
-        //величина разделителя сегментов
+        //величина разделителя сегментов (зависит от ширины parent view)
         float gapSize = (getWidth() / 110);
-        //координата Х для отрисовки круга/арки
+        //координата Х для отрисовки круга/арки (зависит от ширины parent view)
         float circleCenterX = (getWidth() / 100);
         float h = getHeight();
         float w = getWidth();
@@ -124,16 +119,7 @@ public class CustomProgressBar extends View {
         canvas.drawRect(start, 0, start + gap, getHeight(), paint);
     }
 
-    private Integer getColor() {
-        //возвращаем цвет и добавляем его обратно в очередь
-        Integer temp = colorQueue.poll();
-        colorQueue.offer(temp);
-        return temp;
-    }
-
     private void initValues(int... v) {
-        colorList = new ArrayList<>();
-        colorQueue = new ArrayDeque<>();
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         percentValueList = new ArrayList<>();
 
@@ -141,19 +127,6 @@ public class CustomProgressBar extends View {
         int[] kk = getPercentValues(v);
         //список конечных значений для отрисовки сегментов
         for (int i = 0; i < (getPercentValues(v)).length; i++) percentValueList.add(kk[i]);
-
-        //заполнить список цветов сегментов
-        for (int h = 1; h <= percentValueList.size(); h++) {
-            colorList.add(COLOR1);
-            colorList.add(COLOR2);
-            colorList.add(COLOR3);
-        }
-        //заполнить очередь с цветами из списка (если кол-во цветом меньше, чем кол-во сегментов, повторит ту же гамму цветов
-        for (int t = 0; t < colorList.size(); t++) {
-            if (colorQueue != null) {
-                colorQueue.offer(colorList.get(t));
-            }
-        }
     }
 
     //преобразует аргументы, переданные в конструкторе, в % от общей суммы аргументов
