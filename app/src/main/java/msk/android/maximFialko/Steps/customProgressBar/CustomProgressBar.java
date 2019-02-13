@@ -11,6 +11,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
 public class CustomProgressBar extends View {
@@ -30,7 +31,7 @@ public class CustomProgressBar extends View {
     //GAP color
     private String GAP_COLOR = "#ffffff";
 
-    public CustomProgressBar(Context context, int... values) {
+    public CustomProgressBar(@NonNull Context context, int... values) {
         super(context);
         initValues(values);
     }
@@ -83,7 +84,6 @@ public class CustomProgressBar extends View {
         for (int k = 0; k < percentValueList.size(); k++) {
             if (k == 0) {
                 //first segment
-//                paint.setColor(ContextCompat.getColor(context, R.color.color_walk));
                 paint.setColor(Color.parseColor(getColor(colorQueue)));
                 //draw arc
                 drawArc(canvas, 0, 2 * r, h, 90);
@@ -98,7 +98,6 @@ public class CustomProgressBar extends View {
                 drawGap(canvas, tempX, gapSize);
                 tempX += gapSize;
                 //draw rectangle
-//                paint.setColor(ContextCompat.getColor(context, R.color.color_run));
                 paint.setColor(Color.parseColor(getColor(colorQueue)));
                 drawRectangle(canvas, tempX, w - r);
                 tempX = w - r;
@@ -110,7 +109,6 @@ public class CustomProgressBar extends View {
                 drawGap(canvas, tempX, gapSize);
                 tempX += gapSize;
                 //draw rectangle
-//                paint.setColor(ContextCompat.getColor(context, R.color.color_aerobic));
                 paint.setColor(Color.parseColor(getColor(colorQueue)));
                 drawRectangle(canvas, tempX, tempX + (w * percentValueList.get(k) / 100) + gapSize);
                 tempX += (w * percentValueList.get(k) / 100) + gapSize;
@@ -162,7 +160,6 @@ public class CustomProgressBar extends View {
             if ((val[v] * 100 / sum) != 0 && (val[v] * 100 / sum) < MINIMAL_SEGMENT_VALUE) {
                 percentValues[v] = MINIMAL_SEGMENT_VALUE;
             }
-            //todo if (val[v] == 0) ...
             else {
                 percentValues[v] = val[v] * 100 / sum;
             }
