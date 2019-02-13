@@ -50,11 +50,18 @@ public class CustomProgressBar extends View {
     // сеттеры для взаимодействия с прогресс баром через внешний ObjectAnimator
     public void setFirstSegment(int i) {
         this.percentValueList.set(0, i);
+        //redraw custom view on every argument change via external ObjectAnimator
         invalidate();
     }
 
     public void setSecondSegment(int j) {
         this.percentValueList.set(1, j);
+        //redraw custom view on every argument change via external ObjectAnimator
+        invalidate();
+    }
+    public void setThirdSegment(int k) {
+        this.percentValueList.set(2, k);
+        //redraw custom view on every argument change via external ObjectAnimator
         invalidate();
     }
 
