@@ -20,25 +20,25 @@ public class CustomProgressBar extends View {
     private boolean SHOW_ROUND_EDGES = true;
     //show GAPS
     private boolean SHOW_GAPS = true;
-
-    //минимальная величина сегмента в %
+    //minimal section value to be shown in % (meaning: values between >0% and <2% will be shown as 2% section)
     private static final int MINIMAL_SEGMENT_VALUE = 2;
 
     //COLORs for segments
     private String COLOR1 = "#81DAF5";
     private String COLOR2 = "#008db9";
     private String COLOR3 = "#1c0a63";
-    //fill the list with colors
+
+    //fill the list with colors in the order you want them to see
     private final List<String> colorList = Arrays.asList(COLOR3, COLOR2, COLOR1);
 
-    //GAP color
+    //GAPs color
     private String GAP_COLOR = "#ffffff";
 
     public List<Integer> percentValueList;
     private Paint paint;
     private ArrayDeque<String> colorQueue;
 
-    public CustomProgressBar(@NonNull Context context, int... values) {
+    public CustomProgressBar(@NonNull Context context, @NonNull int... values) {
         super(context);
         initValues(values);
     }
@@ -55,7 +55,7 @@ public class CustomProgressBar extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    // setters to interact with custom view via external ObjectAnimator
+    // setters to animate custom view via external ObjectAnimator
     public void setFirstSegment(int i) {
         this.percentValueList.set(0, i);
         //redraw custom view on every argument change via external ObjectAnimator
@@ -83,29 +83,29 @@ public class CustomProgressBar extends View {
         for (String i : colorList) colorQueue.push(i);
 
         //process the list to get proportions (each argument / sum)
-        int[] kk = getPercentValues(v);
+        int[] k = getPercentValues(v);
         //final list for segment drawing
-        for (int i = 0; i < (getPercentValues(v)).length; i++) percentValueList.add(kk[i]);
+        for (int i = 0; i < (getPercentValues(v)).length; i++) percentValueList.add(k[i]);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //координата Х последнего элемента
+        //X coordinate of the last element
         float tempX = 0;
-        //кривизна краев прогресс бара
-        float curve = (float) 1.4;
-        //величина разделителя сегментов (зависит от ширины parent view)
-        float gapSize = (getWidth() / 110);
-        //координата Х для отрисовки круга/арки (зависит от ширины parent view)
-        float circleCenterX = (getWidth() / 100);
         float h = getHeight();
         float w = getWidth();
-        //радиус круга(влияет на закруления краев)
+        //size of gaps (depends from container view width and denominator)
+        float gapSize = (getWidth() / 110);
+        //X coordinate of rounded edges, stands for radius of ark (depends from container view width and denominator)
+        float circleCenterX = (getWidth() / 100);
+        //curve of the round edges of the custom view
+        float curve = (float) 1.4;
+        //arc radius
         float r = circleCenterX * curve;
 
         for (int k = 0; k < percentValueList.size(); k++) {
             if (k == 0) {
-                //first segment
+                //FIRST segment
                 paint.setColor(Color.parseColor(getColor(colorQueue)));
                 //draw arc
                 if (SHOW_ROUND_EDGES) {
@@ -117,7 +117,7 @@ public class CustomProgressBar extends View {
                 tempX = tempX + (w * percentValueList.get(k) / 100);
 
             } else if (k == percentValueList.size() - 1) {
-                //last segment
+                //LAST segment
                 //draw gap
                 if (SHOW_GAPS) {
                     drawGap(canvas, tempX, gapSize);
@@ -132,7 +132,7 @@ public class CustomProgressBar extends View {
                     drawArc(canvas, tempX - r, w, h, 270);
                 }
             } else {
-                //mid segments
+                //MID segments
                 //draw gap
                 if (SHOW_GAPS) {
                     drawGap(canvas, tempX, gapSize);
@@ -161,7 +161,7 @@ public class CustomProgressBar extends View {
 
     private int[] getPercentValues(int... val) {
         int sum = 0;
-        //get sum of all elements
+        //get sum of all arguments
         for (int iterator : val) {
             sum += iterator;
         }
