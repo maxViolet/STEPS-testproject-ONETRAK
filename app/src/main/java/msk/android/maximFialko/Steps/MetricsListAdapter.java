@@ -19,7 +19,7 @@ import msk.android.maximFialko.Steps.utils.*;
 
 public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.ViewHolder> {
     //custom progress bar animation time in MILLISECONDS
-    private static final int PROGRESSBAR_ANIMATION_DURATION = 1700;
+    private static final int PROGRESSBAR_ANIMATION_DURATION = 2000;
 
     @NonNull
     private List<StepsItem> metrics;
@@ -91,10 +91,7 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
 
             setProgressBar(stepsItem.getWalk(), stepsItem.getAerobic(), stepsItem.getRun());
 
-            //set visible block "Goal reached"
-            if (getSumm(stepsItem) >= stepsItem.getGoal()) {
-                goalReachedBlock.setVisibility(View.VISIBLE);
-            }
+            showGoalReached(stepsItem);
         }
 
         private int getSumm(StepsItem stepsItem) {
@@ -118,6 +115,13 @@ public class MetricsListAdapter extends RecyclerView.Adapter<MetricsListAdapter.
             animSet.start();
 
             customProgressBarView.addView(customProgressBar);
+        }
+
+        private void showGoalReached(StepsItem stepsItem) {
+            //set visible block "Goal reached"
+            if (getSumm(stepsItem) >= stepsItem.getGoal()) {
+                goalReachedBlock.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

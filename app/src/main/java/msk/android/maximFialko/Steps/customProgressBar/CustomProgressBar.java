@@ -29,7 +29,7 @@ public class CustomProgressBar extends View {
     private String COLOR3 = "#1c0a63";
 
     //fill the list with colors in the order you want them to see
-    private final List<String> colorList = Arrays.asList(COLOR3, COLOR2, COLOR1);
+    private final List<String> colorList = Arrays.asList(COLOR1, COLOR2, COLOR3);
 
     //GAPs color
     private String GAP_COLOR = "#ffffff";
@@ -38,7 +38,7 @@ public class CustomProgressBar extends View {
     private Paint paint;
     private ArrayDeque<String> colorQueue;
 
-    public CustomProgressBar(@NonNull Context context, @NonNull int... values) {
+    public CustomProgressBar(@NonNull Context context, int... values) {
         super(context);
         initValues(values);
     }
@@ -80,7 +80,9 @@ public class CustomProgressBar extends View {
         colorQueue = new ArrayDeque<>();
 
         //fill colorQueue with predefined colors
-        for (String i : colorList) colorQueue.push(i);
+        for (int g = colorList.size() - 1; g >= 0; g--) {
+            colorQueue.push(colorList.get(g));
+        }
 
         //process the list to get proportions (each argument / sum)
         int[] k = getPercentValues(v);
