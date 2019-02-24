@@ -20,6 +20,8 @@ public class CustomProgressBar extends View {
     private boolean SHOW_ROUND_EDGES = true;
     //show GAPS
     private boolean SHOW_GAPS = true;
+    //GAPs' color
+    private String GAP_COLOR = "#ffffff";
     //minimal section value to be shown in % (meaning: values between >0% and <2% will be shown as 2% section)
     private static final int MINIMAL_SEGMENT_VALUE = 2;
 
@@ -31,11 +33,8 @@ public class CustomProgressBar extends View {
     //fill the list with colors in the order you want them to see
     private final List<String> colorList = Arrays.asList(COLOR1, COLOR2, COLOR3);
 
-    //GAPs color
-    private String GAP_COLOR = "#ffffff";
-
-    public List<Integer> percentValueList;
     private Paint paint;
+    public List<Integer> percentValueList;
     private ArrayDeque<String> colorQueue;
 
     public CustomProgressBar(@NonNull Context context, int... values) {
@@ -105,6 +104,7 @@ public class CustomProgressBar extends View {
         //arc radius
         float r = circleCenterX * curve;
 
+        //draw SEGMENTS based in the percent values proportions
         for (int k = 0; k < percentValueList.size(); k++) {
             if (k == 0) {
                 //FIRST segment

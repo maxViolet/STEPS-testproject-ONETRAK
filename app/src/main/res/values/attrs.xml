@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CustomProgressBar">
-        <attr name="i" format="integer" />
-        <attr name="j" format="integer" />
-        <attr name="k" format="integer" />
+        <attr name="segment1" format="integer" />
+        <attr name="segment2" format="integer" />
+        <attr name="segment3" format="integer" />
+        <attr name="SHOW_ROUND_EDGES" format="boolean" />
+        <attr name="GAP_COLOR" format="string" />
+        <attr name="COLOR1" format="string" />
+        <attr name="COLOR2" format="string" />
+        <attr name="COLOR3" format="string" />
     </declare-styleable>
 </resources>
